@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+	<html lang="ru">
+		<head>
+    	 <meta charset="utf-8">
+    	 
+    	 <title>Service key</title>
+    	 <link rel="stylesheet" href="styles.css">
+    	 <link rel="manifest" href="manifest.json">
+
+    	 <script>
+     		if ('serviceWorker' in navigator) 
+     		{
+      			 window.addEventListener('load', function() {
+        		navigator.serviceWorker.register('/sw.js').then(function(registration) {
+        		console.log('ServiceWorker registration successful with scope: ', registration.scope);
+       		}, function(err) {
+        						console.log('ServiceWorker registration failed: ', err);
+        					});
+      			});
+     }
+   		 </script>
+    <script type="text/javascript">
+
+    	function keyboardClick(key){
+    		console.log(key);
+    		var key_pass = "_ _ _ _";
+			var str = document.querySelector('#edit').value;
+    		console.log(str);
+    		if (key == 'C') {
+    						key = ''; 
+    						str = '';
+    						}
+    		if (key == '<') 
+    		{
+    			if (str.length != 0) str = str.slice(0, -1);
+    			key = '';
+    		}
+    		if (str.length == 2) return;
+    		var key_str = str + key;
+    		document.getElementById('edit').value = key_str;
+    		if (key_str.length > 0 && key_str.length < 3)
+    		{
+    	      key_pass = GetKey(key_str);
+    		}
+    		document.querySelector('#labelResult').textContent = key_pass;
+    	}
+
+
+    	function GetKey(value, year) {
+    var date = new Date();
+    var year = date.getFullYear();
+    var str = "Thequickbrownfoxjumpedoverthelazydog";
+    var str1 = "ThenJoshuaassembledallthetribesofIsraelatShechemHesummonedtheeldersleadersjudgesandofficialsofIsraelandtheypresentedthemselvesbeforeGodJoshuasaidtoallthepeopleThisiswhattheLORDtheGodofIsraelsaysLongagoyourforefathersincludingTerahthefatherofAbrahamandNahorlivedbeyondtheRiveraandworshipedothergodsButItookyourfatherAbrahamfromthelandbeyondtheRiverandledhimthroughoutCanaanandgavehimmanydescendantsIgavehimIsaacandtoIsaacIgaveJacobandEsauIassignedthehillcountryofSeirtoEsaubutJacobandhissonswentdowntoEgyptThenIsentMosesandAaronandIafflictedtheEgyptiansbywhatIdidthereandIbroughtyououtWhenIbroughtyourfathersoutofEgyptyoucametotheseaandtheEgyptianspursuedthemwithchariotsandhorsemenbasfarastheRedSeacButtheycriedtotheLORDforhelpandheputdarknessbetweenyouandtheEgyptianshebroughttheseaoverthemandcoveredthemYousawwithyourowneyeswhatIdidtotheEgyptiansThenyoulivedinthedesertforalongtimeIbroughtyoutothelandoftheAmoriteswholivedeastoftheJordanTheyfoughtagainstyoubutIgavethemintoyourhandsIdestroyedthemfrombeforeyouandyoutookpossessionoftheirlandWhenBalaksonofZipporthekingofMoabpreparedtofightagainstIsraelhesentforBalaamsonofBeortoputacurseonyouButIwouldnotlistentoBalaamsoheblessedyouagainandagainandIdeliveredyououtofhishandThenyoucrossedtheJordanandcametoJerichoThecitizensofJerichofoughtagainstyouasdidalsotheAmoritesPerizzitesCanaanitesHittitesGirgashitesHivitesandJebusitesbutIgavethemintoyourhandsIsentthehornetaheadofyouwhichdrovethemoutbeforeyou—alsothetwoAmoritekingsYoudidnotdoitwithyourownswordandbowSoIgaveyoualandonwhichyoudidnottoilandcitiesyoudidnotbuildandyouliveinthemandeatfromvineyardsandolivegrovesthatyoudidnotplantNowfeartheLORDandservehimwithallfaithfulnessThrowawaythegodsyourforefathersworshipedbeyondtheRiverandinEgyptandservetheLORDButifservingtheLORDseemsundesirabletoyouthenchooseforyourselvesthisdaywhomyouwillservewhetherthegodsyourforefathersservedbeyondtheRiverorthegodsoftheAmoritesinwhoselandyouarelivingButasformeandmyhouseholdwewillservetheLORDThenthepeopleansweredFarbeitfromustoforsaketheLORDtoserveothergodsItwastheLORDourGodhimselfwhobroughtusandourfathersupoutofEgyptfromthatlandofslaveryandperformedthosegreatsignsbeforeoureyesHeprotectedusonourentirejourneyandamongallthenationsthroughwhichwetraveledAndtheLORDdroveoutbeforeusallthenationsincludingtheAmoriteswholivedinthelandWetoowillservetheLORDbecauseheisourGodJoshuasaidtothepeopleYouarenotabletoservetheLORDHeisaholyGodheisajealousGodHewillnotforgiveyourrebellionandyoursinsIfyouforsaketheLORDandserveforeigngodshewillturnandbringdisasteronyouandmakeanendofyouafterhehasbeengoodtoyouButthepeoplesaidtoJoshuaNoWewillservetheLORDThenJoshuasaidYouarewitnessesagainstyourselvesthatyouhavechosentoservetheLORDYeswearewitnessestheyrepliedNowthensaidJoshuathrowawaytheforeigngodsthatareamongyouandyieldyourheartstotheLORDtheGodofIsraelAndthepeoplesaidtoJoshuaWewillservetheLORDourGodandobeyhimOnthatdayJoshuamadeacovenantforthepeopleandthereatShechemhedrewupforthemdecreesandlawsAndJoshuarecordedthesethingsintheBookoftheLawofGodThenhetookalargestoneandsetitupthereundertheoakneartheholyplaceoftheLORDSeehesaidtoallthepeopleThisstonewillbeawitnessagainstusIthasheardallthewordstheLORDhassaidtousItwillbeawitnessagainstyouifyouareuntruetoyourGodBuriedinthePromisedLandThenJoshuasentthepeopleawayeachtohisowninheritanceAfterthesethingsJoshuasonofNuntheservantoftheLORDdiedattheageofahundredandtenAndtheyburiedhiminthelandofhisinheritanceatTimnathSerahdinthehillcountryofEphraimnorthofMountGaashIsraelservedtheLORDthroughoutthelifetimeofJoshuaandoftheelderswhooutlivedhimandwhohadexperiencedeverythingtheLORDhaddoneforIsraelAndJosephsboneswhichtheIsraeliteshadbroughtupfromEgyptwereburiedatShecheminthetractoflandthatJacobboughtforahundredpiecesofsilverefromthesonsofHamorthefatherofShechemThisbecametheinheritanceofJosephsdescendantsAndEleazarsonofAarondiedandwasburiedatGibeahwhichhadbeenallottedtohissonPhinehasinthehillcountryofEphraim";
+
+    var num1 = value * year;
+    var index1 = num1;
+
+    if (index1 > str.length) 
+                                            index1 %= str.length;
+
+     
+    var   num2 = str[index1];   // берем один символ из строки по адресу index1, 
+    num2 = num2.charCodeAt(0); // десятичное значение сивола присваиваем num2
+
+
+    var strout = "";
+    var index2 = num2;
+
+    for (var count = 0; count < 4; ++count) {
+        if (index2 > str1.length) // сравниваем длину строки str1 с idex2
+                            index2 %= str1.length;
+
+        strout += str1[index2];     // берем один символ из строки по адресу index2 и добавляем его к строке  strout
+        index2 += num1;                 // 
+    }
+
+    strout = strout.toUpperCase();
+   return  strout;
+
+}
+    </script>		
+
+		</head>
+			<body>
+				<div class="container-div">
+					<div class="headLabel-div"><p class="textHeader">Key for Cornerstone</p></div>
+					
+					<div class="numbLabel-div"><p class="label">Enter numb</p> <input type="text" id="edit" name="numb" class="numb-text" value="" maxlength="2" readonly="readonly"></div>
+
+					<div class="numbLabel-div"><p class="label">You're key</p><p id="labelResult" class="labelResult">_ _ _ _</p></div>
+					<div class="numbLabel-div keyboard-div">
+						<div class="rowNum-div">
+							<div class="num" onclick="keyboardClick('1')">1</div> <div class="num"onclick="keyboardClick('2')">2</div> <div class="num" onclick="keyboardClick('3')">3</div>
+						</div>
+						<div class="rowNum-div">
+							<div class="num" onclick="keyboardClick('4')">4</div> <div class="num" onclick="keyboardClick('5')">5</div> <div class="num" onclick="keyboardClick('6')">6</div>
+						</div>
+						<div class="rowNum-div">
+							<div class="num" onclick="keyboardClick('7')">7</div> <div class="num" onclick="keyboardClick('8')">8</div> <div class="num" onclick="keyboardClick('9')">9</div>
+						</div>
+						<div class="rowNum-div">
+							<div class="num" onclick="keyboardClick('C')">C</div> <div class="num" onclick="keyboardClick('0')">0</div> <div class="num" onclick="keyboardClick('<')"><<</div>
+						</div>
+					</div>
+				</div>
+
+
+			</body>
+		</html>
