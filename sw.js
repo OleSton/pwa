@@ -1,7 +1,7 @@
 
 // named cache in Cache Storage
 const CACHE_NAME = 'devtools-tips-v3';
-const STATIC_CACHE_URLS = ["/", "/pwa/styles.css", "/pwa/index.html"];
+const STATIC_CACHE_URLS = ["/pwa/", "/pwa/styles.css", "/pwa/index.html"];
 self.addEventListener("install", (event) => {
   console.log("Service Worker installing.");
   event.waitUntil(
