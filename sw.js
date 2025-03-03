@@ -23,8 +23,8 @@ const INITIAL_CACHED_RESOURCES = [
     '/browser/safari/',
     '/browser/firefox/',
     '/browser/chrome/',
-    'styles.css',
-    'index.html',
+    '/pwa/styles.css',
+    '/pwa/index.html',
     
 ];
 
