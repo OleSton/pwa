@@ -38,3 +38,25 @@ self.addEventListener('install', (event) => {
         })(),
     );
 });
+
+
+self.addEventListener("fetch", event => {
+  const url = new URL(event.request.url);
+
+  // Don't care about other-origin URLs.
+  if (url.origin !== location.origin) {
+    return;
+  }
+
+  // Don't care about anything else than GET.
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
+  // Don't care about widget requests.
+  if (url.pathname.includes("/widgets/")) {
+    return;
+  }
+
+ 
+});
