@@ -3,7 +3,7 @@
   "short_name": "Key Gen",
   "description": "App for generation service keys of Cornerstone software",
   "lang": "en-GB",
-  "start_url": "/",
+  "start_url": "/pwa/index.html",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#2c2c2c",
