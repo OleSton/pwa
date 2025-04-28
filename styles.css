@@ -1,0 +1,190 @@
+* {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                           supported by Chrome, Edge, Opera and Firefox */
+}
+
+body {
+    background: #2c2c2c;
+    height: 100vh;
+}
+
+.container-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.headLabel-div {
+    margin-top: 10px;
+    background: #b8891e;
+    padding: 8px;
+    display: flow;
+    align-items: center;
+}
+
+.textHeader {
+    text-align: center;
+    color: #212529;
+    font-family: Arial;
+    font-size: inherit;
+}
+
+.numbLabel-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #212529;
+    margin-top: 5px;
+    color: #cb961b;
+    font-family: Arial;
+    font-size: inherit;
+    padding: 8px;
+    height: 100%;
+}
+
+.numb-text {
+    color: #cb961b;
+    background-color: #212529;
+    background-clip: padding-box;
+    border: 2px solid #cb961b;
+    line-height: 1;
+    padding: 10px;
+}
+
+.numb-text:focus {
+    outline: none;
+    border: 2px solid #cb961b;
+}
+
+.labelResult {
+    color: #cb961b;
+    letter-spacing: 20px;
+    margin-bottom: 8px;
+}
+
+.labelResult {
+    animation: labelResult 2s infinite; /* Параметры анимации */
+}
+
+@keyframes labelResult {
+    from {
+        opacity: 1; /* Непрозрачный текст */
+    }
+    to {
+        opacity: 0.7; /* Прозрачный текст */
+    }
+}
+
+.num {
+    border: 2px solid #cb961b;
+    width: 150px;
+    height: 150px;
+    margin: 5px;
+    align-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.num:hover {
+    background: #2c2c2c;
+}
+
+.rowNum-div {
+    display: flex;
+}
+
+
+/* Стили для мобильных телефонов */
+@media (max-width: 600px) {
+    .container-div, .headLabel-div, .numbLabel-div {
+    }
+
+    .label, .textHeader {
+        text-align: center;
+        font-size: xxx-large;
+    }
+}
+
+/* Стили для планшетов */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .container-div, .headLabel-div, .numbLabel-div {
+
+        width: 100%;
+
+    }
+
+    .label, .textHeader, .numb-text {
+
+        text-align: center;
+        font-size: xxx-large;
+    }
+
+    .numb-text {
+        font-size: 7em;
+        width: 50%;
+    }
+
+    .labelResult {
+        font-size: 7em;
+        margin-top: 0;
+        font-weight: 600;
+    }
+
+    .num {
+        width: 250px;
+        height: 150px;
+        margin: 20px;
+        font-size: 4em;
+
+    }
+
+    .keyboard-div {
+        padding-bottom: 50px;
+        height: auto;
+    }
+
+}
+
+/* Стили для десктопов */
+@media (min-width: 1025px) {
+    .headLabel-div, .numbLabel-div {
+        width: 50%;
+    }
+
+    .label, .numb-text {
+        text-align: center;
+    }
+
+    .numb-text {
+        font-size: xxx-large;
+        width: 30%;
+    }
+
+    .num {
+        order: 1px solid #7d5e17;
+        width: 150px;
+        height: 70px;
+        margin: 10px;
+        font-size: x-large;
+    }
+
+    .labelResult {
+        margin-top: 0;
+        font-size: xxx-large;
+    }
+}
+
+@media (orientation: landscape) {
+    body {
+
+    }
+
+    /* здесь можно сделать видимой какую-нибудь подсказку, в которой предложить повернуть устройство.*/
+}
