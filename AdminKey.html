@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+
+    <title>Reset key</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <script src="crypto-js.min.js"></script>
+    <script>
+        if ('serviceWorker' in navigator)
+        {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+    <script type="text/javascript">
+
+         function keyboardClick(key){
+            //console.log(key);
+            var key_pass = "_ _ _ _ _ _ _";
+            var str = document.querySelector('#edit').value;
+            //console.log(str);
+            if (key == 'C') {
+                key = '';
+                str = '';
+            }
+            if (key == '<')
+            {
+                if (str.length != 0) str = str.slice(0, -1);
+                key = '';
+            }
+            if (str.length > 12) return;
+            var key_str = str + key;
+            document.getElementById('edit').value = key_str;
+            if (key_str.length > 0 && key_str.length < 13)
+            {
+                computeChallengeHash(key_str);                       // return result reset password
+            }
+             if (key_str.length < 1){
+                 document.querySelector('#labelResult').textContent = key_pass;
+             }
+        }
+        /*----------------------------------------------------------------------*/
+
+
+        async function getHashString(input) {
+            const encoder = new TextEncoder();
+            const data = stringToUtf16Bytes(input);
+            const hashBuffer = await crypto.subtle.digest('SHA-512', data);
+
+
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+            // Преобразуем байты в строку битов или в шестнадцатеричную строку
+            const hash = getBitsValue(hashArray);
+            document.querySelector('#labelResult').textContent = hash;
+            return hash;
+        }
+        function stringToUtf16Bytes(str) {
+            const bytes = [];
+            for (let i = 0; i < str.length; i++) {
+                const code = str.charCodeAt(i);
+                // В UTF-16 каждый символ занимает 2 байта (little-endian)
+                bytes.push(code & 0xFF); // младшие байты
+                bytes.push((code >> 8) & 0xFF); // старшие байты
+            }
+            return new Uint8Array(bytes);
+        }
+        function getBitsValue(bytes) {
+            // Исходные байты
+            const bt = new DataView(Uint8Array.from(bytes).buffer);
+            const buffer = bt.buffer;           // Создаем ArrayBuffer из байтов
+            const view = new DataView(buffer);  // Создаем DataView для чтения данных
+            // Читаем 64-битное целое число (с учетом порядка байтов - little endian)
+            const number = absBigInt(view.getBigInt64(0, true)); // true - little endian, false - big endian
+            const result = BigInt.asUintN(64, number % BigInt(999999999999));
+            return result;
+        }
+        function absBigInt(value) {
+            return (value >= 0n) ? value : -value;
+        }
+        // Использование:
+        async function computeChallengeHash(challenge) {
+            const combinedString = challenge + "FE8D50D4-E6D9-11E1-84F6-34906188709B";
+            const hashString = await getHashString(combinedString);
+            // Здесь можно вызвать GetBitsValue или аналогично, если нужно
+            return hashString;
+        }
+        /*----------------------------------------------------------------------*/
+         async function pastFromClipboard(){
+             event.preventDefault(); // Подавляем вызов стандартного контекстного меню
+             try {
+                 const text = await navigator.clipboard.readText(); // читаем текст из буфера
+                 if(isValidNumberString(text) == true){
+                 document.getElementById('edit').value = text; // вставляем в input
+                          computeChallengeHash(text);
+                 }else{
+                     throw new Error("Ошибка типа данных.");
+                 }
+             } catch (err) {
+                 console.error('Ошибка при чтении из буфера обмена:', err);
+             }
+         }
+         function copyToClipboard(value){
+             event.preventDefault(); // Подавляем вызов стандартного контекстного меню
+             navigator.clipboard.writeText(value) // копируем текст в буфер
+                 .then(() => {
+                     alert('Текст скопирован в буфер обмена!');
+                 })
+                 .catch(err => {
+                     console.error('Ошибка копирования: ', err);
+                 });
+         }
+         function isValidNumberString(value) {
+             // Проверка, что значение состоит только из цифр и длина не больше 15
+             value = value.trim(value);
+             const regex = /^\d{1,15}$/;
+             return regex.test(value);
+         }
+         function toMainMenu(){
+
+         }
+        /*----------------------------------------------------------------------*/
+    </script>
+
+</head>
+<body>
+<div class="container-div">
+    <div class="headLabel-div">
+        <div class="btBack-div" onclick="window.location.href='index.html';">
+            <p class="textBtBack"><<</p>
+        </div>
+        <div class="infoHeader">
+            <p class="textHeader">Users politics password reset</p>
+        </div>
+    </div>
+
+    <div class="numbLabel-div"><p class="label">Enter numb</p>
+        <input type="text" id="edit" name="numb" class="numb-text numb-textAdm" value="" maxlength="15" readonly="readonly" oncontextmenu="pastFromClipboard();">
+    </div>
+
+    <div class="numbLabel-div">
+        <p class="label">You're key</p>
+        <p id="labelResult" class="labelResult labelResultAdm" oncontextmenu="copyToClipboard(this.innerText);">_ _ _ _ _ _ _</p>
+    </div>
+    <div class="numbLabel-div keyboard-div">
+        <div class="rowNum-div">
+            <div class="num" onclick="keyboardClick('1')">1</div> <div class="num" onclick="keyboardClick('2')">2</div> <div class="num" onclick="keyboardClick('3')">3</div>
+        </div>
+        <div class="rowNum-div">
+            <div class="num" onclick="keyboardClick('4')">4</div> <div class="num" onclick="keyboardClick('5')">5</div> <div class="num" onclick="keyboardClick('6')">6</div>
+        </div>
+        <div class="rowNum-div">
+            <div class="num" onclick="keyboardClick('7')">7</div> <div class="num" onclick="keyboardClick('8')">8</div> <div class="num" onclick="keyboardClick('9')">9</div>
+        </div>
+        <div class="rowNum-div">
+            <div class="num" onclick="keyboardClick('C')">C</div> <div class="num" onclick="keyboardClick('0')">0</div> <div class="num" onclick="keyboardClick('<')"><<</div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
